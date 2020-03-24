@@ -9,14 +9,16 @@ var _express = _interopRequireDefault(require("express"));
 
 var _morgan = _interopRequireDefault(require("morgan"));
 
-var _path = _interopRequireDefault(require("path"));
-
 var _cors = _interopRequireDefault(require("cors"));
 
 var _bodyParser = require("body-parser");
 
+var _controllers = _interopRequireDefault(require("./resources/controllers"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// import path from "path";
+// import router from "./resources/router";
 // var createError = require("http-errors");
 // var path = require("path");
 // var cookieParser = require("cookie-parser");
@@ -43,13 +45,17 @@ app.use((0, _morgan.default)("dev")); // app.use(cookieParser());
 //   res.render("error");
 // });
 
+app.get("/api", _controllers.default.welcome);
+app.get("/api/ping", _controllers.default.ping);
+app.get("/api/posts", _controllers.default.posts);
+
 const start = () => {
   try {
     // await connect();
     // app.listen(config.port, () => {
     //   console.log(`REST API on http://localhost:${config.port}/api`);
     // });
-    app.listen(() => {
+    app.listen(3000, () => {
       console.log(`REST API on http://localhost:3000/api`);
     });
   } catch (e) {

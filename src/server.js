@@ -1,8 +1,11 @@
 import express from "express";
 import morgan from "morgan";
-import path from "path";
+// import path from "path";
 import cors from "cors";
 import { json, urlencoded } from "body-parser";
+
+// import router from "./resources/router";
+import controllers from "./resources/controllers";
 
 // var createError = require("http-errors");
 // var path = require("path");
@@ -34,6 +37,10 @@ app.use(morgan("dev"));
 //   res.render("error");
 // });
 
+app.get("/api", controllers.welcome);
+app.get("/api/ping", controllers.ping);
+app.get("/api/posts", controllers.posts);
+
 export const start = () => {
   try {
     // await connect();
@@ -41,7 +48,7 @@ export const start = () => {
     //   console.log(`REST API on http://localhost:${config.port}/api`);
     // });
 
-    app.listen(() => {
+    app.listen(3000, () => {
       console.log(`REST API on http://localhost:3000/api`);
     });
   } catch (e) {
